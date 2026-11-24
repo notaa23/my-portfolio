@@ -1,0 +1,134 @@
+---
+import Layout from "../layouts/Layout.astro";
+import ProjectCard from "../components/ProjectCard.astro";
+import { PROFILE, PROJECTS, SKILLS } from "../data/portfolio";
+---
+
+<Layout>
+  <!-- 1. Hero Section -->
+  <section class="flex flex-col-reverse sm:flex-row items-start sm:items-center justify-between gap-8">
+    <div class="space-y-4">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
+        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+        Tersedia untuk proyek & kolaborasi
+      </div>
+
+      <h1 class="text-3xl sm:text-4xl font-bold tracking-tight">
+        Halo, saya {PROFILE.name}.
+      </h1>
+
+      <p class="text-base sm:text-lg text-zinc-600 dark:text-zinc-400 leading-relaxed max-w-xl">
+        {PROFILE.tagline}
+      </p>
+
+      <div class="pt-2 flex flex-wrap items-center gap-4 text-sm font-medium">
+        <a
+          href="#proyek"
+          class="px-4 py-2 rounded-lg bg-zinc-900 text-zinc-50 dark:bg-zinc-100 dark:text-zinc-900 hover:opacity-90 transition-opacity"
+        >
+          Lihat Karya
+        </a>
+        <a
+          href={PROFILE.github}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="px-4 py-2 rounded-lg border border-zinc-300 dark:border-zinc-800 hover:bg-zinc-100 dark:hover:bg-zinc-900 transition-colors"
+        >
+          GitHub
+        </a>
+      </div>
+    </div>
+
+    <!-- Tempat Foto Profil -->
+    <div class="shrink-0">
+      <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-2xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-200 dark:bg-zinc-900 flex items-center justify-center">
+        <img
+          src={PROFILE.avatar}
+          alt={`Foto ${PROFILE.name}`}
+          class="w-full h-full object-cover"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+        />
+        <!-- Placeholder jika file foto belum ditambahkan -->
+        <span class="hidden text-xs font-mono text-zinc-500 text-center px-2">
+          Foto Profil
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. Tentang Singkat -->
+  <section class="space-y-3">
+    <h2 class="text-xs font-mono uppercase tracking-widest text-zinc-500">
+      Tentang
+    </h2>
+    <p class="text-sm sm:text-base leading-relaxed text-zinc-700 dark:text-zinc-300">
+      {PROFILE.about}
+    </p>
+  </section>
+
+  <!-- 3. Proyek Pilihan -->
+  <section id="proyek" class="space-y-6 scroll-mt-24">
+    <div class="flex items-baseline justify-between">
+      <h2 class="text-xs font-mono uppercase tracking-widest text-zinc-500">
+        Proyek Pilihan
+      </h2>
+      <span class="text-xs text-zinc-500">{PROJECTS.length} proyek</span>
+    </div>
+
+    <div class="grid gap-4">
+      {PROJECTS.map((project) => <ProjectCard project={project} />)}
+    </div>
+  </section>
+
+  <!-- 4. Keahlian / Tech Stack -->
+  <section id="keahlian" class="space-y-4 scroll-mt-24">
+    <h2 class="text-xs font-mono uppercase tracking-widest text-zinc-500">
+      Tech Stack & Alat
+    </h2>
+    <div class="flex flex-wrap gap-2">
+      {
+        SKILLS.map((skill) => (
+          <span class="px-3 py-1.5 text-xs font-medium rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white/50 dark:bg-zinc-900/50 text-zinc-700 dark:text-zinc-300">
+            {skill}
+          </span>
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- 5. Kontak -->
+  <section id="kontak" class="space-y-4 scroll-mt-24">
+    <h2 class="text-xs font-mono uppercase tracking-widest text-zinc-500">
+      Kontak
+    </h2>
+    <p class="text-sm sm:text-base text-zinc-600 dark:text-zinc-400">
+      Tertarik berdiskusi tentang proyek atau peluang kerja sama? Silakan hubungi saya melalui email atau tautan di bawah ini.
+    </p>
+    <div class="flex flex-wrap gap-4 text-sm font-medium pt-1">
+      <a
+        href={`mailto:${PROFILE.email}`}
+        class="underline underline-offset-4 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors"
+      >
+        {PROFILE.email}
+      </a>
+      <span class="text-zinc-400 dark:text-zinc-700">•</span>
+      <a
+        href={PROFILE.linkedin}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="underline underline-offset-4 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors"
+      >
+        LinkedIn
+      </a>
+      <span class="text-zinc-400 dark:text-zinc-700">•</span>
+      <a
+        href={PROFILE.github}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="underline underline-offset-4 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors"
+      >
+        GitHub
+      </a>
+    </div>
+  </section>
+</Layout>
